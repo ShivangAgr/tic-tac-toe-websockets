@@ -2,7 +2,7 @@
   "name": "tic-tac-toe-websockets",
   "version": "0.1.0",
   "description": "A Tic Tac Toe game built using WebSockets",
-  "script": {
+  "scripts": {
     "start": "node server"
   },
   "repository": "https://github.com/shivangagr/tic-tac-toe-websockets",
