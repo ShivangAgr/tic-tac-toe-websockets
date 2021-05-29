@@ -1,0 +1,7 @@
+#CopyLogo {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: var(--off-white);
+  margin: 2px 4px;
+}

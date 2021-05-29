@@ -1,0 +1,24 @@
+#OnlineMatch #copy {
+  margin-left: 8px;
+}
+
+#OnlineMatch #copied {
+  opacity: 0.8;
+  font-weight: normal;
+}
+
+#OnlineMatch #info {
+  margin-bottom: 8px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#OnlineMatch #turn {
+  margin-left: 32px;
+}
+
+#OnlineMatch #game-end {
+  text-align: center;
+  font-size: 1.2em;
+  font-weight: bold;
+}

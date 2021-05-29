@@ -1,51 +1,35 @@
 module.exports = function makeMove(gameState, player, block) {
   // also checked on client-side
-  if (
-    !player ||
-    player !== room.gameState.turn ||
-    gameState.blocks[block] !== ""
-  )
+  if (!player || player !== gameState.turn || gameState.blocks[block] !== "")
     return null;
 
-  console.log(
-    "Original gameState before makeMove:\n",
-    JSON.stringify(gameState, 2)
-  );
+  console.log("Original gameState before makeMove:\n", gameState);
 
   gameState.blocks[block] = player;
   gameState.turn = gameState.turn === "X" ? "O" : "X";
   gameState.status = checkGameEnd(gameState.blocks);
 
-  console.log(
-    "Updated gameState after makeMove:\n",
-    JSON.stringify(gameState, 2)
-  );
+  console.log("Updated gameState after makeMove:\n", gameState);
 };
 
 function checkGameEnd(blocks) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
+  if (winning(blocks, "X")) return "Player X has won!";
+  if (winning(blocks, "O")) return "Player O has won!";
 
-  lines.forEach((l) => {
-    if (
-      blocks[l[0]] !== "" &&
-      blocks[l[0]] === blocks[l[1]] &&
-      blocks[l[1]] === blocks[l[2]]
-    )
-      return blocks[l[0]];
-  });
+  for (let i = 0; i < blocks.length; ++i) if (blocks[i] === "") return null;
 
-  blocks.forEach((b) => {
-    if (b === "") return null;
-  });
+  return "It is a DRAW.";
+}
 
-  return "TIE";
+function winning(blocks, player) {
+  return (
+    (blocks[0] === player && blocks[1] === player && blocks[2] === player) ||
+    (blocks[3] === player && blocks[4] === player && blocks[5] === player) ||
+    (blocks[6] === player && blocks[7] === player && blocks[8] === player) ||
+    (blocks[0] === player && blocks[3] === player && blocks[6] === player) ||
+    (blocks[1] === player && blocks[4] === player && blocks[7] === player) ||
+    (blocks[2] === player && blocks[5] === player && blocks[8] === player) ||
+    (blocks[0] === player && blocks[4] === player && blocks[8] === player) ||
+    (blocks[2] === player && blocks[4] === player && blocks[6] === player)
+  );
 }

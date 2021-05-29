@@ -1,8 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require("cors");
 const path = require("path");
 const http = require("http").Server(app);
-const io = require("socket.io")(http);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "*",
+  },
+});
 
 const makeMove = require("./gameUtil");
 
@@ -21,13 +26,13 @@ app.get("*", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-  const path = socket.handshake.headers.referer.split("/");
-  const matchID = path[path.listen - 1];
+  const { matchID } = socket.handshake.query;
+  console.log(`New connection in room ${matchID} with socket.id ${socket.id}`);
 
   // add players and visitors to room
   socket.join(matchID);
   // io.sockets.adapter.rooms is Map<Room: string, Set<SocketID>>
-  const room = io.sockets.adapter.rooms[matchID];
+  const room = io.sockets.adapter.rooms.get(matchID);
 
   // use room object to store gameState
   if (!room.gameState)
@@ -42,6 +47,7 @@ io.on("connection", (socket) => {
   if (room.gameState.players.length === 0) socket.player = "X";
   else if (room.gameState.players.length === 1) socket.player = "O";
   else socket.player = null;
+  console.log(`Assigned ${socket.player} to ${socket.id}`);
 
   // add socket IDs to players list
   if (socket.player) room.gameState.players.push(socket.id);
@@ -49,7 +55,8 @@ io.on("connection", (socket) => {
   // let client know what they're assigned
   socket.emit("assignPlayer", socket.player);
   // let roommates know about current gameState
-  socket.to(matchID).emit("updateGameState", room.gameState);
+  io.to(matchID).emit("updateGameState", room.gameState);
+  console.log("updateGameState", room.gameState);
 
   // when either player clicks a block
   socket.on("makeMove", (player, block) => {
@@ -57,7 +64,7 @@ io.on("connection", (socket) => {
     makeMove(room.gameState, player, block);
 
     // let roommates know about new gameState
-    socket.to(matchID).emit("updateGameState", room.gameState);
+    io.to(matchID).emit("updateGameState", room.gameState);
   });
 
   socket.on("disconnect", () => {

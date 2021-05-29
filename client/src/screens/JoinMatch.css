@@ -1,0 +1,7 @@
+#JoinMatch input {
+  border: none;
+  border-bottom: 2px solid rgb(var(--secondary-color));
+  background-color: rgba(var(--off-white), 0.2);
+  padding: 8px 16px;
+  font-size: 1em;
+}
