@@ -1,8 +1,8 @@
 #Board {
   margin: 24px auto;
   padding: 0;
-  width: 400px;
-  height: 400px;
+  width: 360px;
+  height: 360px;
   padding: 32px;
   background-color: rgb(var(--primary-color));
   box-shadow: -8px 8px 32px rgba(var(--primary-dark-2), 0.6);
@@ -11,6 +11,13 @@
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(3, 1fr);
   transition: filter 0.4s ease-out;
+}
+
+@media screen and (max-width: 600px) {
+  #Board {
+    width: calc(100vw - 128px);
+    height: calc(100vw - 128px);
+  }
 }
 
 #Board::after {
@@ -37,13 +44,6 @@
   bottom: 0;
   width: 100%;
   transform: translateY(100%) skewX(-45deg);
-}
-
-@media screen and (max-width: 600px) {
-  #Board {
-    width: calc(100vw - 128px);
-    height: calc(100vw - 128px);
-  }
 }
 
 #Board.disabled {

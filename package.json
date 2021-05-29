@@ -2,8 +2,16 @@
   "name": "tic-tac-toe-websockets",
   "version": "0.1.0",
   "description": "A Tic Tac Toe game built using WebSockets",
+  "engines": {
+    "yarn": "1.22.5"
+  },
   "scripts": {
-    "start": "node server"
+    "start": "node server",
+    "start-dev": "concurrently \"node server\" \"cd client && yarn start\"",
+    "build:ui": "cd client/ && rm -rf build && yarn run build --prod",
+    "deploy": "git push heroku main",
+    "deploy:full": "yarn run build:ui && git add . && git commit -m uibuild && git push && yarn run deploy",
+    "logs:prod": "heroku logs --tail"
   },
   "repository": "https://github.com/shivangagr/tic-tac-toe-websockets",
   "author": "ShivangAgr <shivangagrawal4@gmail.com>",
@@ -12,5 +20,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "socket.io": "^4.1.2"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0"
   }
 }

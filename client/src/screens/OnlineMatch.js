@@ -24,9 +24,9 @@ function OnlineMatch(props) {
   useEffect(() => {
     // io.connect(location.protocol + "//" + location.host);
     // can be used with useLocation()
-    socket = io("ws://192.168.43.230:3001", { query: { matchID: matchID } });
-    // const url = "ws://" + window.location.host;
-    // socket = io(url, { query: { matchID: matchID } });
+    // socket = io("ws://192.168.43.230:3001", { query: { matchID: matchID } });
+    const url = "ws://" + window.location.host;
+    socket = io(url, { query: { matchID: matchID } });
 
     socket.on("assignPlayer", (newPlayer) => {
       console.log("assignPlayer", newPlayer);
