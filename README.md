@@ -1,8 +1,12 @@
 # ❌⭕ Tic Tac Toe WebSockets [Live Demo 🔗](https://tic-tac-toe-websockets-react.herokuapp.com)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ShivangAgr/tic-tac-toe-websockets)
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ShivangAgr/tic-tac-toe-websockets)
+
+## Description
 
 A Tic Tac Toe game built using WebSockets
+
+Design Inspiration - [Dribbble](https://dribbble.com/shots/10807782-Tic-tac-toe)
 
 ## Features
 
