@@ -1,0 +1,6 @@
+{
+  "name": "Tic Tac Toe Online",
+  "description": "Play Tic Tac Toe online with friends or against THE computer.",
+  "repository": "https://github.com/ShivangAgr/tic-tac-toe-websockets",
+  "keywords": ["node", "tic-tac-toe", "websockets"]
+}
