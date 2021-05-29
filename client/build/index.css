@@ -1,0 +1,21 @@
+:root {
+  --primary-color: 200, 163, 136; /* #c8a388 */
+  --primary-dark-1: 184, 147, 120; /* #b89378 */
+  --primary-dark-2: 168, 131, 104; /* #a88368 */
+
+  --secondary-color: 141, 185, 217; /* #8db9d9 */
+
+  --off-white: 239, 231, 224;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+  background-color: rgb(var(--primary-color));
+  color: rgb(var(--off-white));
+}
